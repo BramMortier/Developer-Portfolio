@@ -1,0 +1,246 @@
+---
+import {
+	Title,
+	Input,
+	Button,
+	Icon,
+	Text,
+	SocialLinks
+} from "@components/index"
+
+interface Props {
+	title?: string
+	contactInfo?: string[]
+	location?: string[]
+	class?: string
+}
+
+const { title, contactInfo, location, class: className } = Astro.props
+---
+
+<div class:list={["contact", className]} id="contact">
+	{title && <Title text={title} Tag="h1" arrow={true} />}
+
+	<form class="contact__form">
+		<Input
+			number="01"
+			id="name"
+			name="name"
+			label="Hi my name is"
+			placeholder="John Doe"
+		/>
+
+		<Input
+			number="02"
+			id="email"
+			name="email"
+			label="You can reach me at this email"
+			placeholder="john.doe@example.com"
+		/>
+
+		<Input
+			number="03"
+			id="project"
+			name="project"
+			label="I am looking for..."
+			placeholder="A website, app, rebranding etc..."
+		/>
+
+		<Input
+			number="04"
+			id="extra"
+			name="extra"
+			label="And I also want u to know"
+			placeholder="This extra info"
+		/>
+	</form>
+
+	<section>
+		<div class="contact__info">
+			<div>
+				<Title text="Contact info" Tag="h3" />
+
+				<ul>
+					{
+						contactInfo.map((row) => (
+							<li>
+								<Text class="c-text--subtle" text={row} />
+							</li>
+						))
+					}
+				</ul>
+			</div>
+
+			<div>
+				<Title text="Location" Tag="h3" />
+
+				<ul>
+					{
+						location.map((row) => (
+							<li>
+								<Text class="c-text--subtle" text={row} />
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</div>
+
+		<div class="contact__socials">
+			<Title text="Location" Tag="h3" />
+
+			<SocialLinks />
+		</div>
+
+		<div class="contact__form-submit">
+			<Button>
+				<span>Send message</span>
+				<Icon name="send" size={24} />
+			</Button>
+		</div>
+	</section>
+</div>
+
+<style is:global lang="scss">
+	@use "@styles/mixins.scss" as *;
+
+	.contact {
+		padding-block: var(--space-64);
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: var(--space-48) var(--space-48);
+
+		@include styles-for(tablet) {
+			grid-template-columns: repeat(12, 1fr);
+			gap: var(--space-64) var(--space-32);
+		}
+
+		@include styles-for(laptop) {
+			padding-block: var(--space-160);
+			gap: var(--space-96) var(--space-64);
+		}
+
+		& > .c-title {
+			grid-column: span 4;
+
+			@include styles-for(tablet) {
+				grid-column: span 12;
+			}
+		}
+
+		&__form {
+			grid-column: span 4;
+			display: flex;
+			flex-direction: column;
+			gap: var(--space-32);
+
+			@include styles-for(tablet) {
+				grid-column: span 12;
+				gap: var(--space-48);
+			}
+
+			@include styles-for(laptop) {
+				gap: var(--space-64);
+			}
+		}
+
+		& > section {
+			grid-column: span 4;
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: var(--space-48) var(--space-48);
+
+			@include styles-for(tablet) {
+				grid-column: span 12;
+				grid-template-columns: repeat(11, 1fr);
+				gap: var(--space-64) var(--space-32);
+			}
+
+			@include styles-for(laptop) {
+				gap: var(--space-64);
+			}
+
+			@include styles-for(desktop) {
+				grid-column: span 11;
+			}
+		}
+
+		&__info {
+			grid-column: 1 / 5;
+			grid-row: 2 / 3;
+			display: flex;
+			flex-direction: column;
+			gap: var(--space-32);
+
+			@include styles-for(tablet) {
+				grid-column: 2 / 7;
+				gap: var(--space-48);
+			}
+
+			@include styles-for(laptop) {
+				grid-row: 1 / 2;
+				grid-column: 1 / 4;
+				gap: var(--space-48);
+			}
+
+			@include styles-for(desktop) {
+				grid-column: 2 / 5;
+			}
+
+			& > div {
+				display: flex;
+				flex-direction: column;
+				gap: var(--space-16);
+
+				@include styles-for(tablet) {
+					gap: var(--space-32);
+				}
+
+				@include styles-for(laptop) {
+					gap: var(--space-48);
+				}
+
+				& > ul {
+					display: flex;
+					flex-direction: column;
+					gap: var(--space-4);
+				}
+			}
+		}
+
+		&__socials {
+			grid-column: 1 / 5;
+			grid-row: 3 / 4;
+			display: flex;
+			flex-direction: column;
+			gap: var(--space-16);
+
+			@include styles-for(tablet) {
+				grid-column: 7 / 12;
+				grid-row: 2 / 3;
+				gap: var(--space-32);
+			}
+
+			@include styles-for(laptop) {
+				gap: var(--space-48);
+				grid-row: 1 / 2;
+				grid-column: 5 / 8;
+			}
+		}
+
+		&__form-submit {
+			grid-column: span 4;
+			display: flex;
+			justify-content: flex-end;
+			height: fit-content;
+
+			@include styles-for(tablet) {
+				grid-column: span 12;
+			}
+
+			@include styles-for(laptop) {
+				grid-column: 8 / 12;
+			}
+		}
+	}
+</style>

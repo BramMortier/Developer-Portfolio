@@ -1,0 +1,60 @@
+---
+import { Navigation, Icon, Text, Link } from "@components/index"
+
+interface Props {
+	class?: string
+}
+
+const { class: className } = Astro.props
+---
+
+<header class:list={["header", className]}>
+	<Link href="/" class="header__logo c-link--plain">
+		<Icon name="chevron" size={16} />
+		<Text class="typo-h3" text="Bram Mortier" />
+	</Link>
+
+	<Navigation />
+</header>
+
+<style is:global lang="scss">
+	@use "@styles/mixins.scss" as *;
+
+	.header {
+		--header-color: var(--scheme-contrast);
+
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: var(--space-48);
+		padding-block: var(--space-16) var(--space-32);
+
+		@include styles-for(laptop) {
+			grid-template-columns: repeat(12, 1fr);
+		}
+
+		&__logo {
+			color: var(--header-color);
+			grid-column: span 3;
+			display: flex;
+			margin-top: 2px;
+			gap: var(--space-4);
+
+			& > .c-text {
+				margin-top: 4px;
+			}
+
+			@include styles-for(laptop) {
+				grid-column: 1 / 4;
+			}
+		}
+
+		& > .c-navigation {
+			display: none;
+
+			@include styles-for(laptop) {
+				display: initial;
+				grid-column: 4 / 13;
+			}
+		}
+	}
+</style>

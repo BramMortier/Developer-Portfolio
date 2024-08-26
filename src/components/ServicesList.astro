@@ -1,0 +1,65 @@
+---
+import { Text } from "@components/index"
+
+interface Skillset {
+	name: string
+	skills: string[]
+}
+
+interface Props {
+	toolset: Skillset[]
+	class?: string
+}
+
+const { toolset, class: className } = Astro.props
+---
+
+<ul class:list={["c-services-list", className]}>
+	{
+		toolset.map((skillset) => (
+			<li class="c-services-list__skillset">
+				<Text class="c-text--subtle" text={skillset.name} />
+
+				<ul>
+					{skillset.skills.map((skill) => (
+						<Text class="typo-h2" text={skill} />
+					))}
+				</ul>
+			</li>
+		))
+	}
+</ul>
+
+<style is:global lang="scss">
+	@use "@styles/mixins.scss" as *;
+
+	.c-services-list {
+		--services-list-color: var(--scheme-contrast);
+
+		color: var(--services-list-color);
+
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-32);
+		width: 100%;
+		height: min-content;
+
+		@include styles-for(mobileL) {
+			gap: var(--space-48);
+		}
+
+		@include styles-for(laptop) {
+			gap: var(--space-64);
+		}
+
+		&__skillset {
+			display: flex;
+			flex-direction: column;
+			gap: var(--space-12);
+
+			& .c-text {
+				cursor: pointer;
+			}
+		}
+	}
+</style>

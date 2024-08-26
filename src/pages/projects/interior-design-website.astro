@@ -1,0 +1,72 @@
+---
+import { ProjectLayout } from "@layouts/index"
+import { content } from "@config/pages/projects/interiorDesignWebsite"
+
+import {
+	ProjectHeroBlock,
+	ProjectShowcaseBlock,
+	ProjectColumnGalleryBlock,
+	ProjectFullwidthGalleryBlock,
+	NextProjectBlock,
+	ProjectSplitHighlightBlock
+} from "@blocks/body"
+
+import { Container } from "@components/index"
+---
+
+<ProjectLayout title="Project" description="This is a project page">
+	<Container>
+		<ProjectHeroBlock
+			title={content.hero.title}
+			intro={content.hero.intro}
+			completed={content.hero.completed}
+			client={content.hero.client}
+			services={content.hero.services}
+			technologies={content.hero.technologies}
+			industry={content.hero.industry}
+			image={content.hero.image}
+			imageMobile={content.hero.imageMobile}
+		/>
+	</Container>
+
+	<Container class="scheme-dark">
+		<ProjectShowcaseBlock
+			title={content.projectShowcase.title}
+			text={content.projectShowcase.text}
+			image={content.projectShowcase.image}
+		/>
+	</Container>
+
+	<Container class="c-container--full">
+		<ProjectFullwidthGalleryBlock
+			image={content.projectFullwidthGallery1.image}
+		/>
+	</Container>
+
+	<Container>
+		<ProjectSplitHighlightBlock
+			text={content.projectSplitHighlight.text}
+			image={content.projectSplitHighlight.image}
+		/>
+	</Container>
+
+	<Container class="c-container--full">
+		<ProjectFullwidthGalleryBlock
+			image={content.projectFullwidthGallery2.image}
+		/>
+	</Container>
+
+	<Container>
+		<ProjectColumnGalleryBlock
+			images={content.projectColumnGallery.images}
+		/>
+	</Container>
+
+	<Container class="scheme-dark">
+		<NextProjectBlock
+			href={content.nextProject.href}
+			text={content.nextProject.text}
+			image={content.nextProject.image}
+		/>
+	</Container>
+</ProjectLayout>

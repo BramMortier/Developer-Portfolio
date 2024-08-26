@@ -1,0 +1,52 @@
+---
+import { IconButton, Icon, Button } from "@components/index"
+
+interface Props {
+	class?: string
+}
+
+const { class: className } = Astro.props
+---
+
+<section id="playground-buttons" class:list={["playground-buttons", className]}>
+	<div class="playground-buttons__basic">
+		<Button>
+			<span>Primary button</span>
+		</Button>
+
+		<Button>
+			<span>Send message</span>
+			<Icon name="send" size={24} />
+		</Button>
+
+		<Button>
+			<span>Contact me</span>
+			<Icon name="text-bubble" size={24} />
+		</Button>
+
+		<Button disabled>
+			<span>Primary button (disabled)</span>
+		</Button>
+	</div>
+</section>
+
+<style is:global lang="scss">
+	.playground-buttons {
+		--playground-bg: var(--scheme-base);
+
+		background-color: var(--playground-bg);
+
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-16);
+		padding: var(--space-32);
+
+		&__basic,
+		&__complex,
+		&__basic-disabled,
+		&__complex-disabled {
+			display: flex;
+			gap: var(--space-16);
+		}
+	}
+</style>

@@ -1,0 +1,46 @@
+---
+import { Text } from "@components/index"
+
+interface Props {
+	technologies: string[]
+	class?: string
+}
+
+const { technologies, class: className } = Astro.props
+---
+
+<ul class:list={["c-tech-stack-list", className]}>
+	{
+		technologies.map((technology) => (
+			<li>
+				<Text class="typo-body-sm" text={technology} />
+			</li>
+		))
+	}
+</ul>
+
+<style is:global lang="scss">
+	.c-tech-stack-list {
+		--tech-stack-list-color: var(--scheme-contrast);
+		--tech-stack-list-border-color: var(--scheme-contrast);
+
+		color: var(--tech-stack-list-color);
+
+		display: flex;
+		flex-direction: column;
+		height: fit-content;
+		width: 100%;
+
+		& > li {
+			display: flex;
+			justify-content: flex-start;
+			padding-block: var(--space-2);
+			border-bottom: 1px solid var(--tech-stack-list-border-color);
+			width: 100%;
+		}
+
+		&--mirrored > li {
+			justify-content: flex-end;
+		}
+	}
+</style>

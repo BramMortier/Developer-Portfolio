@@ -1,0 +1,26 @@
+---
+import { Image } from "@components/index"
+
+interface Props {
+	image?: ImageMetadata
+	class?: string
+}
+
+const { class: className, image } = Astro.props
+---
+
+<div class:list={["fullwidth-gallery", className]}>
+	<Image
+		src={image}
+		class="c-picture--cover"
+		alt="fullwidth gallery image"
+		sizes="100vw"
+	/>
+</div>
+
+<style is:global lang="scss">
+	@use "@styles/mixins.scss" as *;
+
+	.fullwidth-gallery {
+	}
+</style>

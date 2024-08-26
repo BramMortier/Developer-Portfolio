@@ -1,0 +1,93 @@
+---
+import { HTMLAttributes } from "astro/types"
+import { Icon } from "@components/index"
+
+interface Props extends HTMLAttributes<"button"> {
+	class?: string
+}
+
+const { class: className, ...props } = Astro.props
+---
+
+<button class:list={["c-icon-button", className]} {...props}>
+	<slot />
+
+	<div class="c-icon-button__icon">
+		<Icon name="send" />
+	</div>
+</button>
+
+<style is:global lang="scss">
+	.c-icon-button {
+		--icon-button-bg: var(--scheme-contrast);
+		--icon-button-color: var(--scheme-contrast-inverted);
+		--icon-button-icon-bg: var(--clr-orange-700);
+		--icon-button-icon-color: var(--clr-white);
+
+		background-color: var(--icon-button-bg);
+		color: var(--icon-button-color);
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: var(--space-16);
+
+		font-family: var(--font-secondary);
+		font-size: var(--fs-16);
+		font-weight: var(--fw-600);
+
+		outline: none;
+		border: none;
+		border-radius: var(--border-radius-2);
+		padding-block: var(--space-8);
+		padding-inline: var(--space-16) var(--space-8);
+		height: 3.125rem;
+
+		transition: all ease 0.2s;
+
+		&__icon {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			aspect-ratio: 1 / 1;
+			height: 100%;
+			border-radius: var(--border-radius-2);
+			background-color: var(--icon-button-icon-bg);
+			color: var(--icon-button-icon-color);
+		}
+
+		&--secondary {
+			.c-icon-button__icon {
+				--icon-button-icon-bg: var(--clr-green-600);
+			}
+		}
+
+		&--tertiary {
+			.c-icon-button__icon {
+				--icon-button-icon-bg: var(--scheme-contrast-inverted);
+				--icon-button-icon-color: var(--scheme-contrast);
+			}
+		}
+
+		&:disabled {
+			--icon-button-bg: var(--scheme-subtle);
+			--icon-button-color: var(--scheme-extra-subtle);
+
+			.c-icon-button__icon {
+				--icon-button-icon-bg: var(--scheme-extra-subtle);
+				--icon-button-icon-color: var(--scheme-subtle);
+			}
+
+			&:hover {
+				cursor: not-allowed;
+				transform: translateY(0);
+			}
+		}
+
+		&:hover {
+			cursor: pointer;
+			transform: translateY(calc(var(--space-4) * -1));
+		}
+	}
+</style>

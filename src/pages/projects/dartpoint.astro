@@ -1,0 +1,78 @@
+---
+import { ProjectLayout } from "@layouts/index"
+import { content } from "@config/pages/projects/dartpoint"
+
+import {
+	ProjectHeroBlock,
+	ProjectHighlightBlock,
+	ProjectShowcaseBlock,
+	ProjectColumnGalleryBlock,
+	ProjectFullwidthGalleryBlock,
+	ProjectExplainationBlock,
+	NextProjectBlock
+} from "@blocks/body"
+
+import { Container } from "@components/index"
+---
+
+<ProjectLayout title="Project" description="This is a project page">
+	<Container>
+		<ProjectHeroBlock
+			title={content.hero.title}
+			intro={content.hero.intro}
+			completed={content.hero.completed}
+			client={content.hero.client}
+			services={content.hero.services}
+			technologies={content.hero.technologies}
+			industry={content.hero.industry}
+			image={content.hero.image}
+			imageMobile={content.hero.imageMobile}
+		/>
+	</Container>
+
+	<Container>
+		<ProjectColumnGalleryBlock
+			class="column-gallery--mirrored"
+			images={content.projectColumnGallery.images}
+		/>
+	</Container>
+
+	<Container>
+		<ProjectExplainationBlock text={content.projectExplaination.text} />
+	</Container>
+
+	<Container class="c-container--full">
+		<ProjectFullwidthGalleryBlock
+			image={content.projectFullwidthGallery1.image}
+		/>
+	</Container>
+
+	<Container class="scheme-dark">
+		<ProjectShowcaseBlock
+			title={content.projectShowcase.title}
+			text={content.projectShowcase.text}
+			image={content.projectShowcase.image}
+		/>
+	</Container>
+
+	<Container>
+		<ProjectHighlightBlock
+			image={content.projectHighlight.image}
+			text={content.projectHighlight.text}
+		/>
+	</Container>
+
+	<Container class="c-container--full">
+		<ProjectFullwidthGalleryBlock
+			image={content.projectFullwidthGallery2.image}
+		/>
+	</Container>
+
+	<Container class="scheme-dark">
+		<NextProjectBlock
+			href={content.nextProject.href}
+			text={content.nextProject.text}
+			image={content.nextProject.image}
+		/>
+	</Container>
+</ProjectLayout>

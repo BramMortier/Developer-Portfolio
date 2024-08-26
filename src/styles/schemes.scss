@@ -1,0 +1,16 @@
+// ===========================================================================
+// Theme & scheme definitions
+// ===========================================================================
+.scheme-light {
+	--scheme-base: var(--clr-white);
+	--scheme-contrast: var(--clr-grey-900);
+	--scheme-subtle-contrast: var(--clr-grey-500);
+	--scheme-contrast-inverted: var(--clr-white);
+}
+
+.scheme-dark {
+	--scheme-base: var(--clr-grey-900);
+	--scheme-contrast: var(--clr-white);
+	--scheme-subtle-contrast: var(--clr-grey-300);
+	--scheme-contrast-inverted: var(--clr-grey-900);
+}

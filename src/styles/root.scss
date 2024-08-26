@@ -1,0 +1,92 @@
+@use "@styles/mixins.scss" as *;
+
+:root {
+	// =========================================================================
+	// Color propreties
+	// =========================================================================
+
+	--clr-black: hsl(0, 0%, 0%);
+
+	--clr-grey-900: hsl(0, 0%, 7%);
+	--clr-grey-700: hsl(0, 0%, 31%);
+	--clr-grey-500: hsl(0, 0%, 54%);
+	--clr-grey-300: hsl(0, 0%, 72%);
+
+	--clr-white: hsl(0, 0%, 100%);
+
+	// =========================================================================
+	// Spacing propreties
+	// =========================================================================
+	$spacing-values: (
+		1,
+		2,
+		4,
+		8,
+		10,
+		12,
+		16,
+		20,
+		24,
+		32,
+		48,
+		64,
+		80,
+		96,
+		112,
+		128,
+		144,
+		160,
+		256,
+		400
+	);
+
+	@each $value in $spacing-values {
+		--space-#{$value}: #{calc($value / 16)}rem;
+	}
+
+	// =========================================================================
+	// Extra propreties
+	// =========================================================================
+	$border-radius-values: ();
+
+	@each $value in $border-radius-values {
+		--border-radius-#{$value}: #{$value}px;
+	}
+
+	--border-radius-round: 100%;
+
+	// =========================================================================
+	// Container propreties
+	// =========================================================================
+	--container-default-width: 1600px;
+	--container-default-gap: var(--space-48);
+	--container-default-bound-l: var(--space-16);
+	--container-default-bound-r: var(--space-16);
+
+	@include styles-for(mobileL) {
+		--container-default-gap: var(--space-48);
+		--container-default-bound-l: var(--space-32);
+		--container-default-bound-r: var(--space-32);
+	}
+
+	@include styles-for(laptop) {
+		--container-default-gap: var(--space-48);
+		--container-default-bound-l: var(--space-48);
+		--container-default-bound-r: var(--space-48);
+	}
+
+	@include styles-for(desktop) {
+		--container-default-gap: var(--space-64);
+		--container-default-bound-l: var(--space-64);
+		--container-default-bound-r: var(--space-64);
+	}
+
+	--container-full-width: 100vw;
+	--container-full-gap: var(--space-32);
+	--container-full-bound-l: 0;
+	--container-full-bound-r: 0;
+
+	@include styles-for(laptop) {
+		--container-full-gap: var(--space-64);
+	}
+}

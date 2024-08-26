@@ -1,0 +1,16 @@
+// =============================================================================
+// Breakpoint mixin
+// =============================================================================
+$breakpoints: (
+	"mobileL": 420px,
+	"tablet": 768px,
+	"laptop": 1024px,
+	"desktop": 1400px,
+	"desktopL": 1920px
+);
+
+@mixin styles-for($size) {
+	@media (min-width: map-get($breakpoints, $size)) {
+		@content;
+	}
+}

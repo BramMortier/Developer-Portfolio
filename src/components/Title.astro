@@ -1,0 +1,54 @@
+---
+import { Icon } from "@components/index"
+
+interface Props {
+	Tag: string
+	text: string
+	class?: string
+	arrow?: boolean
+}
+
+const { Tag, text, class: className, arrow } = Astro.props
+
+const splitTitle = text.split(" ")
+---
+
+<Tag class:list={["c-title", className]}>
+	{
+		splitTitle.map((word, index) => (
+			<>
+				<span class="c-title__word">
+					{word}
+
+					{index === splitTitle.length - 1 &&
+						arrow &&
+						Tag === "h1" && (
+							<Icon name="diagonal-arrow" size={20} />
+						)}
+				</span>
+			</>
+		))
+	}
+</Tag>
+
+<style is:global lang="scss">
+	.c-title {
+		--title-color: var(--scheme-contrast);
+
+		color: var(--title-color);
+		width: fit-content;
+
+		&--subtle {
+			--title-color: var(--scheme-subtle-contrast);
+		}
+
+		&__word {
+			display: inline-block;
+
+			&:last-child > .c-icon {
+				display: inline-flex;
+				vertical-align: baseline;
+			}
+		}
+	}
+</style>

@@ -1,0 +1,56 @@
+---
+import { Input } from "@components/index"
+
+interface Props {
+	class?: string
+}
+
+const { class: className } = Astro.props
+---
+
+<section id="playground-forms" class:list={["playground-forms", className]}>
+	<div class="playground-forms__inputs">
+		<Input
+			number="01"
+			id="name"
+			name="name"
+			label="Hi my name is"
+			placeholder="John Doe"
+		/>
+
+		<Input
+			number="02"
+			id="email"
+			name="email"
+			label="You can reach me at this email"
+			placeholder="john.doe@example.com"
+		/>
+
+		<Input
+			number="03"
+			id="project"
+			name="project"
+			label="I am looking for..."
+			placeholder="A website, app, rebranding etc..."
+		/>
+	</div>
+</section>
+
+<style is:global lang="scss">
+	.playground-forms {
+		--playground-bg: var(--scheme-base);
+
+		background-color: var(--playground-bg);
+
+		padding: var(--space-32);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-160);
+
+		&__inputs {
+			display: flex;
+			flex-direction: column;
+			gap: var(--space-64);
+		}
+	}
+</style>

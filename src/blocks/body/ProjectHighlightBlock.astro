@@ -1,0 +1,70 @@
+---
+import { Text, Image } from "@components/index"
+
+interface Props {
+	text?: string
+	image?: ImageMetadata
+	class?: string
+}
+
+const { class: className, text, image } = Astro.props
+---
+
+<div class:list={["project-highlight", className]}>
+	<Image
+		src={image}
+		class="c-picture--cover"
+		alt="project highlight image"
+		sizes="(max-width: 768px) 100vw, 75vw"
+	/>
+
+	<Text text={text} class="typo-h2" />
+</div>
+
+<style is:global lang="scss">
+	@use "@styles/mixins.scss" as *;
+
+	.project-highlight {
+		padding-block: var(--space-64);
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		align-items: center;
+		gap: var(--space-32) var(--space-48);
+
+		@include styles-for(tablet) {
+			grid-template-columns: repeat(12, 1fr);
+			padding-block: var(--space-96);
+			gap: var(--space-32) var(--space-48);
+		}
+
+		@include styles-for(laptop) {
+			padding-block: var(--space-160);
+			gap: var(--space-64);
+		}
+
+		& > .c-picture {
+			grid-column: span 4;
+
+			@include styles-for(tablet) {
+				grid-column: 2 / 12;
+			}
+
+			@include styles-for(desktop) {
+				grid-column: 3 / 11;
+			}
+		}
+
+		& > .c-text {
+			grid-column: span 4;
+			text-align: center;
+
+			@include styles-for(tablet) {
+				grid-column: 2 / 12;
+			}
+
+			@include styles-for(desktop) {
+				grid-column: 3 / 11;
+			}
+		}
+	}
+</style>

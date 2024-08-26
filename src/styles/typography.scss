@@ -1,0 +1,145 @@
+:root {
+	// =========================================================================
+	// Typography propreties
+	// =========================================================================
+	--font-primary: "scale-variable", sans-serif;
+	--font-secondary: "Helvetica", sans-serif;
+
+	$font-size-values: (14, 16, 18, 20, 24, 40, 96, 160, 256);
+
+	@each $size in $font-size-values {
+		--fs-#{$size}: #{calc($size / 16)}rem;
+	}
+
+	$font-weight-values: (300, 500);
+
+	@each $weight in $font-weight-values {
+		--fw-#{$weight}: #{$weight};
+	}
+
+	$line-height-values: (
+		"none": 1,
+		"narrow": 1.4,
+		"spacious": 1.5,
+		"wide": 1.6
+	);
+
+	@each $key, $value in $line-height-values {
+		--lh-#{$key}: #{$value};
+	}
+}
+
+// =============================================================================
+// Heading typos
+// =============================================================================
+
+// fluid settings: 375px fs 40px lh 1 - 1600px fs 96px lh 1
+h1,
+.typo-h1 {
+	font-family: var(--font-primary);
+	font-weight: var(--fw-300);
+	font-size: clamp(var(--fs-40), 4.571vw + 1.429rem, var(--fs-96));
+	line-height: clamp(
+		calc(var(--fs-40) * var(--lh-none)),
+		4.571vw + 1.429rem,
+		calc(var(--fs-96) * var(--lh-none))
+	);
+	text-transform: uppercase;
+}
+
+// fluid settings: 375px fs 20px lh 1.4 - 1600px fs 40px lh 1.4
+h2,
+.typo-h2 {
+	font-family: var(--font-primary);
+	font-weight: var(--fw-300);
+	font-size: clamp(var(--fs-20), 1.633vw + 0.867rem, var(--fs-40));
+	line-height: clamp(
+		calc(var(--fs-20) * var(--lh-narrow)),
+		2.286vw + 1.214rem,
+		calc(var(--fs-40) * var(--lh-narrow))
+	);
+	letter-spacing: 0.05rem;
+}
+
+// fluid settings: 375px fs 16px lh 1.5 - 1600px fs 20px lh 1.4
+h3,
+.typo-h3 {
+	font-family: var(--font-primary);
+	font-weight: var(--fw-300);
+	font-size: clamp(var(--fs-16), 0.327vw + 0.923rem, var(--fs-20));
+	line-height: clamp(
+		calc(var(--fs-16) * var(--lh-spacious)),
+		0.327vw + 1.423rem,
+		calc(var(--fs-20) * var(--lh-narrow))
+	);
+	letter-spacing: 0.05rem;
+}
+
+// =============================================================================
+// Text typos
+// =============================================================================
+
+// fluid settings: 375px fs 14px lh 1.4 - 1600px fs 16px lh 1.5
+.typo-body-sm {
+	font-family: var(--font-secondary);
+	font-weight: var(--fw-300);
+	font-size: clamp(var(--fs-14), 0.163vw + 0.837rem, var(--fs-16));
+	line-height: clamp(
+		calc(var(--fs-14) * var(--lh-narrow)),
+		0.359vw + 1.141rem,
+		calc(var(--fs-16) * var(--lh-spacious))
+	);
+}
+
+// fluid settings: 375px fs 16px lh 1.5 - 1600px fs 20px lh 1.6
+p,
+.typo-body-md {
+	font-family: var(--font-secondary);
+	font-weight: var(--fw-300);
+	font-size: clamp(var(--fs-16), 0.327vw + 0.923rem, var(--fs-20));
+	line-height: clamp(
+		calc(var(--fs-16) * var(--lh-spacious)),
+		0.653vw + 1.347rem,
+		calc(var(--fs-20) * var(--lh-wide))
+	);
+}
+
+// fluid settings: 375px fs 18px lh 1.4 - 1600px fs 24px lh 1.5
+.typo-body-lg {
+	font-family: var(--font-secondary);
+	font-weight: var(--fw-300);
+	font-size: clamp(var(--fs-18), 0.49vw + 1.01rem, var(--fs-24));
+	line-height: clamp(
+		calc(var(--fs-18) * var(--lh-narrow)),
+		0.882vw + 1.368rem,
+		calc(var(--fs-24) * var(--lh-spacious))
+	);
+}
+
+// =============================================================================
+// Extra typos
+// =============================================================================
+
+// fluid settings: 768px fs 96px lh 1 - 1600px fs 256px lh 1
+
+.typo-giant-number {
+	font-family: var(--font-primary);
+	font-variation-settings: "wght" 500;
+	font-size: clamp(var(--fs-160), 11.538vw + 4.462rem, var(--fs-256));
+	line-height: clamp(
+		calc(var(--fs-160) * var(--lh-none)),
+		11.538vw + 4.462rem,
+		calc(var(--fs-256) * var(--lh-none))
+	);
+}
+
+// =============================================================================
+// Utils
+// =============================================================================
+.typo-bold {
+	font-weight: var(--fw-500);
+}
+
+.typo-uppercase {
+	text-transform: uppercase;
+}

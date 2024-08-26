@@ -1,0 +1,248 @@
+---
+import { Title, Text, TechStackList, Image } from "@components/index"
+
+interface Props {
+	name?: string
+	index?: string
+	text?: string
+	technologies?: string[]
+	images?: ImageMetadata[]
+	accentColor?: string[]
+	class?: string
+}
+
+const {
+	name,
+	text,
+	index,
+	technologies,
+	images,
+	accentColor,
+	class: className
+} = Astro.props
+---
+
+<article class:list={["c-project-case-1", className]}>
+	<div class="c-project-case-1__left">
+		<div class="c-project-case-1__name">
+			<Image
+				src={images[1]}
+				class="c-picture--cover"
+				alt="hero image"
+				sizes="(max-width: 768px) 100vw, 50vw"
+			/>
+
+			{name && <Title Tag="h2" text={name} />}
+		</div>
+
+		<div class="c-project-case-1__technologies">
+			<TechStackList
+				class="c-tech-stack-list--mirrored"
+				technologies={technologies}
+			/>
+
+			<TechStackList technologies={technologies} />
+
+			<Image
+				src={images[2]}
+				class="c-picture--cover"
+				alt="hero image"
+				sizes="(max-width: 768px) 100vw, 50vw"
+			/>
+		</div>
+	</div>
+
+	<div class="c-project-case-1__right">
+		{
+			text && (
+				<Text
+					class="c-project-case-1__index typo-giant-number"
+					text={index}
+				/>
+			)
+		}
+
+		<Image
+			src={images[0]}
+			class="c-picture--cover"
+			alt="hero image"
+			sizes="(max-width: 768px) 100vw, 50vw"
+		/>
+
+		{text && <Text class="typo-body-lg c-text--subtle" text={text} />}
+	</div>
+</article>
+
+<style is:global lang="scss" define:vars={{ accentColor: accentColor }}>
+	@use "@styles/mixins.scss" as *;
+
+	.c-project-case-1 {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: var(--space-24) var(--space-48);
+
+		@include styles-for(tablet) {
+			grid-template-columns: repeat(12, 1fr);
+			gap: var(--space-48);
+		}
+
+		@include styles-for(laptop) {
+			gap: var(--space-64);
+		}
+
+		&__left {
+			grid-column: span 4;
+			display: flex;
+			flex-direction: column;
+			gap: var(--space-16);
+
+			@include styles-for(tablet) {
+				gap: var(--space-24);
+				grid-column: 1 / 7;
+			}
+
+			@include styles-for(desktop) {
+				gap: var(--space-96);
+			}
+		}
+
+		&__name {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: var(--space-24) var(--space-48);
+
+			@include styles-for(tablet) {
+				grid-template-columns: repeat(6, 1fr);
+				gap: var(--space-24) var(--space-64);
+			}
+
+			& > .c-title {
+				grid-column: span 4;
+
+				@include styles-for(tablet) {
+					grid-column: span 6;
+				}
+			}
+
+			& > .c-picture {
+				grid-column: span 4;
+
+				@include styles-for(mobileL) {
+					grid-column: span 3;
+				}
+
+				@include styles-for(tablet) {
+					grid-column: span 6;
+				}
+
+				@include styles-for(desktop) {
+					grid-column: span 4;
+				}
+			}
+		}
+
+		&__technologies {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			grid-template-rows: auto;
+			gap: var(--space-48);
+
+			@include styles-for(tablet) {
+				gap: var(--space-64);
+				grid-template-rows: auto auto;
+				grid-template-columns: repeat(6, 1fr);
+			}
+
+			& > .c-picture {
+				display: none;
+
+				@include styles-for(desktop) {
+					display: initial;
+					grid-column: 3 / 7;
+				}
+			}
+
+			& > .c-tech-stack-list {
+				&:nth-child(1) {
+					display: none;
+
+					@include styles-for(tablet) {
+						display: initial;
+						grid-column: 3 / 7;
+					}
+
+					@include styles-for(laptop) {
+						grid-column: 4 / 7;
+					}
+
+					@include styles-for(desktop) {
+						grid-column: span 2;
+					}
+				}
+
+				&:nth-child(2) {
+					grid-column: span 3;
+
+					@include styles-for(mobileL) {
+						grid-column: span 2;
+					}
+
+					@include styles-for(tablet) {
+						display: none;
+					}
+				}
+			}
+		}
+
+		&__right {
+			margin-top: 0;
+			grid-column: span 4;
+			grid-row: 1 / 2;
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			gap: var(--space-24);
+
+			@include styles-for(tablet) {
+				margin-top: var(--space-96);
+				grid-column: 7 / 13;
+			}
+
+			@include styles-for(laptop) {
+				margin-top: var(--space-160);
+			}
+
+			@include styles-for(desktop) {
+				margin-top: var(--space-96);
+			}
+
+			& > .c-picture {
+				display: block;
+				height: fit-content;
+				z-index: 2;
+				position: relative;
+			}
+
+			& > .c-text {
+				display: none;
+
+				@include styles-for(tablet) {
+					display: initial;
+				}
+			}
+		}
+
+		&__index {
+			position: absolute;
+			transform: translateY(-90%);
+			left: 20%;
+			z-index: 0;
+			color: var(--accentColor);
+			display: none;
+
+			@include styles-for(tablet) {
+				display: initial;
+			}
+		}
+	}
+</style>

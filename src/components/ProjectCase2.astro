@@ -1,0 +1,242 @@
+---
+import { Title, Text, TechStackList, Image } from "@components/index"
+
+interface Props {
+	name?: string
+	index?: string
+	text?: string
+	technologies?: string[]
+	images?: ImageMetadata[]
+	accentColor?: string[]
+	class?: string
+}
+
+const {
+	name,
+	text,
+	index,
+	technologies,
+	images,
+	accentColor,
+	class: className
+} = Astro.props
+---
+
+<article class:list={["c-project-case-2", className]}>
+	<div class="c-project-case-2__left">
+		<Image
+			src={images[1]}
+			class="c-picture--cover"
+			alt="hero image"
+			sizes="(max-width: 768px) 100vw, 25vw"
+		/>
+	</div>
+
+	<div class="c-project-case-2__center">
+		{
+			text && (
+				<Text
+					class="c-project-case-2__index typo-giant-number"
+					text={index}
+				/>
+			)
+		}
+
+		<Image
+			src={images[0]}
+			class="c-picture--cover"
+			alt="hero image"
+			sizes="(max-width: 768px) 100vw, 50vw"
+		/>
+
+		{name && <Title Tag="h2" text={name} />}
+
+		<TechStackList technologies={technologies} />
+
+		{text && <Text class="typo-body-lg c-text--subtle" text={text} />}
+	</div>
+
+	<div class="c-project-case-2__right">
+		<TechStackList
+			class="c-tech-stack-list--mirrored"
+			technologies={technologies}
+		/>
+
+		<Image
+			src={images[2]}
+			class="c-picture--cover"
+			alt="hero image"
+			sizes="(max-width: 768px) 100vw, 25vw"
+		/>
+
+		<Image
+			src={images[3]}
+			class="c-picture--cover"
+			alt="hero image"
+			sizes="100vw"
+		/>
+	</div>
+</article>
+
+<style is:global lang="scss" define:vars={{ accentColor: accentColor }}>
+	@use "@styles/mixins.scss" as *;
+
+	.c-project-case-2 {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: var(--space-24) var(--space-48);
+
+		@include styles-for(tablet) {
+			gap: var(--space-48);
+			grid-template-columns: repeat(12, 1fr);
+		}
+
+		@include styles-for(laptop) {
+			gap: var(--space-64);
+		}
+
+		&__left {
+			display: none;
+
+			@include styles-for(desktop) {
+				display: initial;
+				grid-column: 1 / 4;
+				align-self: flex-end;
+			}
+
+			& > .c-picture {
+				height: fit-content;
+				display: block;
+			}
+		}
+
+		&__center {
+			grid-column: span 4;
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: var(--space-16) var(--space-64);
+			position: relative;
+
+			@include styles-for(tablet) {
+				display: flex;
+				flex-direction: column;
+				gap: var(--space-24);
+				grid-column: 1 / 8;
+			}
+
+			@include styles-for(laptop) {
+				grid-column: 1 / 9;
+			}
+
+			@include styles-for(desktop) {
+				grid-column: 4 / 10;
+			}
+
+			& > .c-tech-stack-list {
+				grid-column: span 3;
+
+				@include styles-for(mobileL) {
+					grid-column: span 2;
+				}
+
+				@include styles-for(tablet) {
+					display: none;
+				}
+			}
+
+			& > .c-text {
+				display: none;
+
+				@include styles-for(tablet) {
+					display: initial;
+				}
+			}
+
+			& > .c-title {
+				margin-top: var(--space-8);
+				grid-column: span 4;
+
+				@include styles-for(tablet) {
+					margin-top: 0;
+				}
+			}
+
+			& > .c-picture {
+				grid-column: span 4;
+				height: fit-content;
+				display: block;
+			}
+		}
+
+		&__right {
+			grid-column: span 4;
+			grid-row: 1 / 2;
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			grid-template-rows: min-content;
+			gap: var(--space-48) var(--space-64);
+			margin-top: 0;
+
+			@include styles-for(tablet) {
+				grid-column: 8 / 13;
+			}
+
+			@include styles-for(laptop) {
+				margin-top: var(--space-96);
+				gap: var(--space-64) var(--space-64);
+				grid-column: 9 / 13;
+			}
+
+			@include styles-for(desktop) {
+				grid-template-columns: repeat(3, 1fr);
+				grid-column: 10 / 13;
+			}
+
+			& > .c-tech-stack-list {
+				grid-column: 2 / 5;
+				display: none;
+
+				@include styles-for(tablet) {
+					display: initial;
+				}
+			}
+
+			& > .c-picture {
+				&:nth-child(2) {
+					display: none;
+					grid-column: 1 / 5;
+					height: fit-content;
+
+					@include styles-for(tablet) {
+						display: block;
+					}
+				}
+
+				&:nth-child(3) {
+					grid-column: 1 / 5;
+
+					@include styles-for(mobileL) {
+						grid-column: 2 / 5;
+					}
+
+					@include styles-for(tablet) {
+						display: none;
+					}
+				}
+			}
+		}
+
+		&__index {
+			display: none;
+			position: absolute;
+			transform: translateY(-90%);
+			left: 20%;
+			z-index: 0;
+			color: var(--accentColor);
+
+			@include styles-for(tablet) {
+				display: initial;
+			}
+		}
+	}
+</style>

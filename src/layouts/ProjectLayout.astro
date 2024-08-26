@@ -1,0 +1,46 @@
+---
+import "../styles/index.scss"
+
+import { HeaderPartial } from "@blocks/partials/index"
+import { Container } from "@components/index"
+
+interface Props {
+	title: string
+	description: string
+}
+
+const { title, description } = Astro.props
+---
+
+<html lang="en">
+	<head>
+		<title>{title} | Astro boilerplate</title>
+
+		<meta charset="utf-8" />
+		<meta name="description" content={description} />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="robots" content="index" />
+		<meta name="language" content="en" />
+
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+		<script src="@scripts/index"></script>
+	</head>
+	<body class="base-layout scheme-light">
+		<Container>
+			<HeaderPartial />
+		</Container>
+
+		<main>
+			<slot />
+		</main>
+	</body>
+</html>
+
+<style is:global lang="scss">
+	.base-layout {
+		display: flex;
+		flex-direction: column;
+	}
+</style>

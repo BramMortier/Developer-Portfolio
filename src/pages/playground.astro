@@ -1,0 +1,66 @@
+---
+import "@styles/index.scss"
+
+import { PlaygroundLayout } from "@layouts/index"
+import { Container } from "@components/index"
+import {
+	ButtonsBlock,
+	LinksBlock,
+	TypographyBlock,
+	IconsBlock,
+	MediaBlock,
+	ColorsBlock,
+	CardsBlock,
+	ExtraComponentsBlock,
+	FormsBlock
+} from "@blocks/playground/index"
+---
+
+<PlaygroundLayout
+	title="Playground"
+	description="A showcase of all reusable components and their variants."
+>
+	<Container>
+		<ColorsBlock />
+	</Container>
+
+	<Container>
+		<ButtonsBlock />
+		<ButtonsBlock class="scheme-dark" />
+	</Container>
+
+	<Container>
+		<IconsBlock />
+		<IconsBlock class="scheme-dark" />
+	</Container>
+
+	<Container>
+		<LinksBlock />
+		<LinksBlock class="scheme-dark" />
+	</Container>
+
+	<Container>
+		<TypographyBlock />
+		<TypographyBlock class="scheme-dark" />
+	</Container>
+
+	<Container>
+		<FormsBlock />
+		<FormsBlock class="scheme-dark" />
+	</Container>
+
+	<Container>
+		<CardsBlock />
+		<CardsBlock class="scheme-dark" />
+	</Container>
+
+	<Container>
+		<ExtraComponentsBlock />
+		<ExtraComponentsBlock class="scheme-dark" />
+	</Container>
+
+	<Container>
+		<MediaBlock />
+		<MediaBlock class="scheme-dark" />
+	</Container>
+</PlaygroundLayout>

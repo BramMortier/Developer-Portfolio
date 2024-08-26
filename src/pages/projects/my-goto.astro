@@ -1,0 +1,65 @@
+---
+import { ProjectLayout } from "@layouts/index"
+import { content } from "@config/pages/projects/myGoto"
+
+import {
+	ProjectHeroBlock,
+	ProjectHighlightBlock,
+	ProjectShowcaseBlock,
+	ProjectColumnGalleryBlock,
+	ProjectFullwidthGalleryBlock,
+	NextProjectBlock
+} from "@blocks/body"
+
+import { Container } from "@components/index"
+---
+
+<ProjectLayout title="Project" description="This is a project page">
+	<Container>
+		<ProjectHeroBlock
+			title={content.hero.title}
+			intro={content.hero.intro}
+			completed={content.hero.completed}
+			client={content.hero.client}
+			services={content.hero.services}
+			technologies={content.hero.technologies}
+			industry={content.hero.industry}
+			image={content.hero.image}
+			imageMobile={content.hero.imageMobile}
+		/>
+	</Container>
+
+	<Container>
+		<ProjectHighlightBlock
+			text={content.projectHighlight.text}
+			image={content.projectHighlight.image}
+		/>
+	</Container>
+
+	<Container class="scheme-dark">
+		<ProjectShowcaseBlock
+			title={content.projectShowcase.title}
+			text={content.projectShowcase.text}
+			image={content.projectShowcase.image}
+		/>
+	</Container>
+
+	<Container>
+		<ProjectColumnGalleryBlock
+			images={content.projectColumnGallery.images}
+		/>
+	</Container>
+
+	<Container class="c-container--full">
+		<ProjectFullwidthGalleryBlock
+			image={content.projectFullwidthGallery.image}
+		/>
+	</Container>
+
+	<Container class="scheme-dark">
+		<NextProjectBlock
+			text={content.nextProject.text}
+			image={content.nextProject.image}
+		/>
+	</Container>
+</ProjectLayout>

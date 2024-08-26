@@ -1,0 +1,66 @@
+---
+import { HTMLAttributes } from "astro/types"
+
+interface Props extends HTMLAttributes<"button"> {
+	class?: string
+}
+
+const { class: className, ...props } = Astro.props
+---
+
+<button class:list={["c-button typo-h3", className]} {...props}>
+	<slot />
+</button>
+
+<style is:global lang="scss">
+	@use "@styles/mixins.scss" as *;
+
+	.c-button {
+		--button-bg: transparent;
+		--button-color: var(--scheme-contrast);
+		--button-border-color: var(--scheme-contrast);
+
+		background-color: var(--button-bg);
+		color: var(--button-color);
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: var(--space-16);
+		width: fit-content;
+
+		outline: none;
+		border: 1px solid var(--button-border-color);
+		border-radius: var(--border-radius-2);
+		padding: var(--space-12) var(--space-16);
+
+		transition: all ease 0.2s;
+
+		@include styles-for(laptop) {
+			padding: var(--space-16) var(--space-24);
+		}
+
+		&--secondary {
+			border: none;
+			padding: 0;
+		}
+
+		& > span {
+			margin-top: 3px;
+		}
+
+		&:disabled {
+			opacity: 0.3;
+
+			&:hover {
+				cursor: not-allowed;
+				transform: translateY(0);
+			}
+		}
+
+		&:hover {
+			cursor: pointer;
+			transform: translateY(calc(var(--space-4) * -1));
+		}
+	}
+</style>

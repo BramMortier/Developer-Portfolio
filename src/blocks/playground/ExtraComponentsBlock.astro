@@ -1,0 +1,70 @@
+---
+import { ServicesList } from "@components/index"
+
+interface Props {
+	class?: string
+}
+
+const toolset = [
+	{
+		name: "Design",
+		skills: [
+			"Figma",
+			"UI/UX Principles",
+			"Wireframing",
+			"Design Systems",
+			"Prototyping/Testing"
+		]
+	},
+	{
+		name: "Branding",
+		skills: [
+			"Logo Design",
+			"Brand Guidelines",
+			"User Research",
+			"Visual Identity"
+		]
+	},
+	{
+		name: "Development",
+		skills: [
+			"Craft CMS",
+			"Astro",
+			"Vue 3",
+			"PostgreSQL",
+			"Express (Hono)",
+			"GSAP",
+			"Laravel",
+			"Python"
+		]
+	},
+	{
+		name: "Audiovisual",
+		skills: ["Premiere Pro", "Photography", "Videography"]
+	}
+]
+
+const { class: className } = Astro.props
+---
+
+<section
+	id="playground-extra-components"
+	class:list={["playground-extra-components", className]}
+>
+	<div class="playground-extra-components__services-list">
+		<ServicesList toolset={toolset} />
+	</div>
+</section>
+
+<style is:global lang="scss">
+	.playground-extra-components {
+		--playground-bg: var(--scheme-base);
+
+		background-color: var(--playground-bg);
+
+		padding: var(--space-32);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-160);
+	}
+</style>

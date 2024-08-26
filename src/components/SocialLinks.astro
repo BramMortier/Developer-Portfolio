@@ -1,0 +1,38 @@
+---
+import { SocialLink } from "@components/index"
+
+import { socials } from "@config/global/socials"
+
+interface Props {
+	class?: string
+}
+
+const { class: className } = Astro.props
+---
+
+<ul class:list={["c-social-links", className]}>
+	{
+		socials.links.map((link) => (
+			<li>
+				<SocialLink href={link?.href} label={link?.label} />
+			</li>
+		))
+	}
+</ul>
+
+<style is:global lang="scss">
+	.c-social-links {
+		--social-links-color: var(--scheme-contrast);
+
+		color: var(--social-links-color);
+
+		display: flex;
+		flex-direction: column;
+		width: fit-content;
+		height: fit-content;
+
+		&--mirrored .c-social-link {
+			flex-direction: row-reverse;
+		}
+	}
+</style>

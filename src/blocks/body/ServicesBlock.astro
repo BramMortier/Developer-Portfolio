@@ -1,0 +1,74 @@
+---
+import { Title, Text, ServicesList } from "@components/index"
+
+interface Props {
+	title?: string
+	text?: string
+	toolset: any
+	class?: string
+}
+
+const { class: className, title, text, toolset } = Astro.props
+---
+
+<js-services class:list={["services", className]} id="skills">
+	<div class="services__intro">
+		{title && <Title text={title} Tag="h1" arrow={true} />}
+
+		{text && <Text class="typo-body-lg c-text--subtle" text={text} />}
+	</div>
+
+	<ServicesList toolset={toolset} />
+</js-services>
+
+<style is:global lang="scss">
+	@use "@styles/mixins.scss" as *;
+
+	.services {
+		padding-block: var(--space-64);
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: var(--space-48);
+
+		@include styles-for(laptop) {
+			padding-block: var(--space-160);
+			grid-template-columns: repeat(12, 1fr);
+			gap: var(--space-64);
+		}
+
+		&__intro {
+			grid-column: span 4;
+			height: fit-content;
+			display: flex;
+			flex-direction: column;
+			gap: var(--space-32);
+
+			@include styles-for(laptop) {
+				grid-column: span 6;
+				display: grid;
+				grid-template-columns: repeat(6, 1fr);
+				gap: var(--space-64);
+			}
+
+			& > .c-title {
+				@include styles-for(laptop) {
+					grid-column: span 6;
+				}
+			}
+
+			& > .c-text {
+				@include styles-for(laptop) {
+					grid-column: 2 / 7;
+				}
+			}
+		}
+
+		& > .c-services-list {
+			grid-column: span 4;
+
+			@include styles-for(laptop) {
+				grid-column: 8 / 12;
+			}
+		}
+	}
+</style>

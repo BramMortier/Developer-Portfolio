@@ -1,0 +1,71 @@
+---
+import { Title, Text } from "@components/index"
+
+interface Props {
+	title?: string
+	text?: string
+	author?: string
+	authorRole?: string
+	class?: string
+}
+
+const { title, text, author, authorRole, class: className } = Astro.props
+---
+
+<article class:list={["c-testimonial-card", className]}>
+	<div>
+		<div class="c-testimonial-card__content">
+			{title && <Title text={title} Tag="h2" />}
+
+			{text && <Text text={text} />}
+		</div>
+
+		<div class="c-testimonial-card__author">
+			{author && <Text class="typo-bold" text={author} />}
+
+			{authorRole && <Text class="typo-bold" text={authorRole} />}
+		</div>
+	</div>
+</article>
+
+<style is:global lang="scss">
+	@use "@styles/mixins.scss" as *;
+
+	.c-testimonial-card {
+		--card-bg: var(--scheme-base);
+		--card-border-color: var(--scheme-contrast);
+
+		background-color: var(--card-bg);
+		padding: var(--space-24);
+		border: 1px solid var(--card-border-color);
+		height: unset !important;
+
+		@include styles-for(tablet) {
+			padding: var(--space-32);
+		}
+
+		@include styles-for(laptop) {
+			padding: var(--space-48);
+		}
+
+		& > div {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			gap: var(--space-48);
+			height: 100%;
+		}
+
+		&__content {
+			display: flex;
+			flex-direction: column;
+			gap: var(--space-24);
+		}
+
+		&__author {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+	}
+</style>

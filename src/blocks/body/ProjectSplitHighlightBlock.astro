@@ -1,0 +1,84 @@
+---
+import { Text, Image } from "@components/index"
+
+interface Props {
+	text?: string
+	image?: ImageMetadata
+	class?: string
+}
+
+const { class: className, text, image } = Astro.props
+---
+
+<div class:list={["project-split-highlight", className]}>
+	<Image
+		src={image}
+		class="c-picture--cover"
+		alt="project highlight image"
+		sizes="(max-width: 768px) 100vw, 75vw"
+	/>
+
+	<Text text={text} class="typo-h2" />
+</div>
+
+<style is:global lang="scss">
+	@use "@styles/mixins.scss" as *;
+
+	.project-split-highlight {
+		display: grid;
+		padding-block: var(--space-48);
+		align-items: center;
+		grid-template-columns: repeat(4, 1fr);
+		gap: var(--space-24) var(--space-48);
+
+		@include styles-for(tablet) {
+			grid-template-columns: repeat(12, 1fr);
+			padding-block: var(--space-64);
+		}
+
+		@include styles-for(laptop) {
+			padding-block: var(--space-96);
+		}
+
+		@include styles-for(desktop) {
+			padding-block: var(--space-160);
+		}
+
+		& > .c-picture {
+			grid-column: span 4;
+
+			@include styles-for(tablet) {
+				grid-column: 1 / 7;
+				grid-row: 1;
+			}
+		}
+
+		& > .c-text {
+			grid-column: span 4;
+
+			@include styles-for(tablet) {
+				grid-column: 7 / 13;
+			}
+		}
+
+		&--mirrored {
+			& > .c-text {
+				grid-column: 1 / 7;
+
+				@include styles-for(tablet) {
+					grid-column: 1 / 7;
+					grid-row: 1;
+				}
+			}
+
+			& > .c-picture {
+				grid-column: span 4;
+				grid-row: 1;
+
+				@include styles-for(tablet) {
+					grid-column: 7 / 13;
+				}
+			}
+		}
+	}
+</style>

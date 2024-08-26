@@ -1,0 +1,58 @@
+---
+import {
+	Open,
+	DiagonalArrow,
+	Send,
+	TextBubble,
+	Download,
+	FlagBEL,
+	FlagDEN,
+	Arrow,
+	Chevron
+} from "@assets/icons/index"
+
+interface Props {
+	name: string
+	class?: string
+	rotation?: number
+	size?: number
+}
+
+const { name, class: className, rotation = 0, size = 16 } = Astro.props
+
+const iconMap = {
+	"diagonal-arrow": DiagonalArrow,
+	open: Open,
+	send: Send,
+	download: Download,
+	"text-bubble": TextBubble,
+	"flag-bel": FlagBEL,
+	"flag-den": FlagDEN,
+	arrow: Arrow,
+	chevron: Chevron
+}
+
+const IconComponent = iconMap[name]
+---
+
+<div class:list={["c-icon", className]}>
+	<IconComponent />
+</div>
+
+<style
+	is:global
+	lang="scss"
+	define:vars={{ iconSize: `${size}px`, rotation: `${rotation}deg` }}
+>
+	.c-icon {
+		display: flex;
+		justify-self: center;
+		align-items: center;
+		transform: rotate(var(--rotation));
+
+		& > svg {
+			width: var(--iconSize);
+			height: var(--iconSize);
+		}
+	}
+</style>

@@ -1,0 +1,102 @@
+---
+import { Title, Text, Image } from "@components/index"
+
+interface Props {
+	title?: string
+	text?: string
+	image?: ImageMetadata
+	class?: string
+}
+
+const { class: className, text, title, image } = Astro.props
+---
+
+<div class:list={["project-showcase", className]}>
+	<div class="project-showcase__explaination">
+		{title && <Title text={title} Tag="h2" />}
+
+		{text && <Text text={text} class="typo-body-lg" />}
+	</div>
+
+	<Image
+		src={image}
+		class="c-picture--cover"
+		alt="project highlight image"
+		sizes="(max-width: 768px) 100vw, 75vw"
+	/>
+</div>
+
+<style is:global lang="scss">
+	@use "@styles/mixins.scss" as *;
+
+	.project-showcase {
+		padding-block: var(--space-48);
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: var(--space-48);
+
+		@include styles-for(tablet) {
+			padding-block: var(--space-64);
+			grid-template-columns: repeat(12, 1fr);
+			gap: var(--space-64) var(--space-48);
+		}
+
+		@include styles-for(laptop) {
+			padding-block: var(--space-96);
+			gap: var(--space-96) var(--space-64);
+		}
+
+		@include styles-for(desktop) {
+			padding-block: var(--space-160);
+		}
+
+		&__explaination {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: var(--space-24) var(--space-48);
+			grid-column: span 4;
+
+			@include styles-for(tablet) {
+				grid-template-columns: repeat(12, 1fr);
+				grid-column: span 12;
+				gap: var(--space-48);
+			}
+
+			@include styles-for(laptop) {
+				gap: var(--space-64);
+			}
+
+			& > .c-text {
+				grid-column: span 4;
+
+				@include styles-for(tablet) {
+					grid-column: 7 / 13;
+				}
+
+				@include styles-for(laptop) {
+					grid-column: 8 / 13;
+				}
+			}
+
+			& > .c-title {
+				grid-column: span 4;
+
+				@include styles-for(tablet) {
+					grid-column: 1 / 6;
+				}
+
+				@include styles-for(laptop) {
+					grid-column: 1 / 6;
+				}
+			}
+		}
+
+		& > .c-picture {
+			grid-column: span 4;
+
+			@include styles-for(tablet) {
+				grid-column: span 12;
+			}
+		}
+	}
+</style>

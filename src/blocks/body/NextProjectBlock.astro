@@ -1,0 +1,101 @@
+---
+import { Image, Title, Text, Link } from "@components/index"
+
+interface Props {
+	image?: ImageMetadata
+	href?: string
+	text?: string
+	class?: string
+}
+
+const { class: className, image, text, href } = Astro.props
+---
+
+<div class:list={["next-case", className]}>
+	<div class="next-case__info">
+		<Title text="Next case" Tag="h1" arrow={true} />
+
+		{text && <Text text={text} class="c-text--subtle typo-body-lg" />}
+	</div>
+
+	<Link href={href} class="c-link--plain">
+		<Image
+			src={image}
+			class="c-picture--cover"
+			alt="fullwidth gallery image"
+			sizes="100vw"
+		/>
+	</Link>
+</div>
+
+<style is:global lang="scss">
+	@use "@styles/mixins.scss" as *;
+
+	.next-case {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: var(--space-48);
+		padding-block: var(--space-48);
+
+		@include styles-for(mobileL) {
+			padding-block: var(--space-64);
+		}
+
+		@include styles-for(tablet) {
+			grid-template-columns: repeat(12, 1fr);
+			gap: var(--space-48) var(--space-32);
+		}
+
+		@include styles-for(laptop) {
+			padding-block: var(--space-96);
+		}
+
+		@include styles-for(desktop) {
+			padding-block: var(--space-160);
+		}
+
+		&__info {
+			grid-column: span 4;
+			display: flex;
+			gap: var(--space-16);
+			flex-direction: column;
+			justify-content: space-between;
+
+			@include styles-for(tablet) {
+				grid-column: span 12;
+			}
+
+			@include styles-for(laptop) {
+				grid-column: 1 / 7;
+			}
+
+			@include styles-for(desktop) {
+				grid-column: 1 / 6;
+			}
+
+			& > .c-text {
+				max-width: 100%;
+
+				@include styles-for(mobileL) {
+					max-width: 80%;
+				}
+			}
+		}
+
+		& > .c-link {
+			grid-column: span 4;
+
+			@include styles-for(tablet) {
+				grid-column: span 12;
+			}
+
+			@include styles-for(laptop) {
+				grid-column: 7 / 13;
+			}
+
+			@include styles-for(desktop) {
+				grid-column: 6 / 13;
+			}
+		}
+	}
+</style>

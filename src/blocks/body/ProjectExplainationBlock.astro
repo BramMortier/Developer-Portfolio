@@ -1,0 +1,57 @@
+---
+import { Text } from "@components/index"
+
+interface Props {
+	text?: string
+	class?: string
+}
+
+const { class: className, text } = Astro.props
+---
+
+<div class:list={["explaination", className]}>
+	{text && <Text text={text} class="c-text--subtle typo-body-lg" />}
+</div>
+
+<style is:global lang="scss">
+	@use "@styles/mixins.scss" as *;
+
+	.explaination {
+		padding-block: var(--space-48);
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: var(--space-48);
+
+		@include styles-for(tablet) {
+			padding-block: var(--space-64);
+			grid-template-columns: repeat(12, 1fr);
+			gap: var(--space-32);
+		}
+
+		@include styles-for(laptop) {
+			padding-block: var(--space-96);
+			gap: var(--space-64);
+		}
+
+		@include styles-for(desktop) {
+			padding-block: var(--space-160);
+		}
+
+		& > .c-text {
+			grid-column: span 4;
+			white-space: pre-line;
+
+			@include styles-for(tablet) {
+				grid-column: span 10;
+			}
+
+			@include styles-for(laptop) {
+				grid-column: span 8;
+			}
+
+			@include styles-for(desktop) {
+				grid-column: span 6;
+			}
+		}
+	}
+</style>

@@ -1,0 +1,26 @@
+{
+	"name": "",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro",
+		"disable-toolbar": "astro preferences disable devToolbar",
+		"enable-toolbar": "astro preferences enable devToolbar"
+	},
+	"dependencies": {
+		"astro": "^4.4.1",
+		"gsap": "^3.12.5",
+		"lenis": "^1.1.9",
+		"sass": "^1.71.1",
+		"split-type": "^0.3.4",
+		"swiper": "^11.1.9"
+	},
+	"devDependencies": {
+		"prettier": "3.2.5",
+		"prettier-plugin-astro": "^0.13.0"
+	}
+}

@@ -1,0 +1,50 @@
+---
+interface Props {
+	class?: string
+}
+
+const { class: className } = Astro.props
+
+const colorPalette = [
+	{ name: "--clr-black", value: "hsl(0, 0%, 0%)" },
+	{ name: "--clr-grey-900", value: "hsl(0, 0%, 10%)" },
+	{ name: "--clr-grey-500", value: "hsl(0, 0%, 50%)" },
+	{ name: "--clr-grey-300", value: "hsl(0, 0%, 70%)" },
+	{ name: "--clr-grey-200", value: "hsl(0, 0%, 80%)" },
+	{ name: "--clr-white", value: "hsl(0, 0%, 100%)" }
+]
+---
+
+<section id="playground-colors" class:list={["playground-colors", className]}>
+	{
+		colorPalette.map((color) => (
+			<div
+				class="playground-colors__color"
+				style={{
+					backgroundColor: color.value,
+					border:
+						color.value === "hsl(0, 0%, 100%)"
+							? "1px solid var(--clr-grey-300)"
+							: "none"
+				}}
+			/>
+		))
+	}
+</section>
+
+<style is:global lang="scss">
+	.playground-colors {
+		--playground-bg: var(--scheme-base);
+
+		background-color: var(--playground-bg);
+
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: var(--space-16);
+		padding: var(--space-32);
+
+		&__color {
+			height: 33vh;
+		}
+	}
+</style>

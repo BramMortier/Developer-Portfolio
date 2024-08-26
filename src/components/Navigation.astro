@@ -1,0 +1,35 @@
+---
+import { navigation } from "@config/global/navigation"
+
+import { Link } from "@components/index"
+
+interface Props {
+	class?: string
+}
+
+const { class: className } = Astro.props
+---
+
+<nav class:list={["c-navigation", className]}>
+	<ul>
+		{
+			navigation.links.map((link: any) => (
+				<li>
+					<Link href={link.href}>{link.text}</Link>
+				</li>
+			))
+		}
+	</ul>
+</nav>
+
+<style is:global lang="scss">
+	.c-navigation {
+		width: 100%;
+
+		& > ul {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+	}
+</style>

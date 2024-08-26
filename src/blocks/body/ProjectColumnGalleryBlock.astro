@@ -1,0 +1,96 @@
+---
+import { Image } from "@components/index"
+
+interface Props {
+	images?: ImageMetadata[]
+	class?: string
+}
+
+const { class: className, images } = Astro.props
+---
+
+<div class:list={["column-gallery", className]}>
+	<Image
+		src={images[0]}
+		class="c-picture--cover"
+		alt="gallery image"
+		sizes="(max-width: 768px) 100vw, 50vw"
+	/>
+
+	<Image
+		src={images[1]}
+		class="c-picture--cover"
+		alt="gallery image"
+		sizes="(max-width: 768px) 100vw, 50vw"
+	/>
+</div>
+
+<style is:global lang="scss">
+	@use "@styles/mixins.scss" as *;
+
+	.column-gallery {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: var(--space-16) var(--space-32);
+		padding-block: var(--space-16);
+
+		@include styles-for(mobileL) {
+			padding-block: var(--space-48);
+			gap: var(--space-48) var(--space-32);
+		}
+
+		@include styles-for(tablet) {
+			grid-template-columns: repeat(12, 1fr);
+			gap: var(--space-64) var(--space-32);
+			padding-block: var(--space-64);
+		}
+
+		@include styles-for(laptop) {
+			gap: var(--space-96) var(--space-64);
+			padding-block: var(--space-96);
+		}
+
+		@include styles-for(desktop) {
+			padding-block: var(--space-160);
+			gap: var(--space-160) var(--space-64);
+		}
+
+		& > .c-picture {
+			&:nth-child(1) {
+				grid-column: span 4;
+
+				@include styles-for(tablet) {
+					grid-column: 1 / 10;
+				}
+			}
+
+			&:nth-child(2) {
+				grid-column: span 4;
+
+				@include styles-for(tablet) {
+					grid-column: 4 / 13;
+				}
+			}
+		}
+
+		&--mirrored {
+			& > .c-picture {
+				&:nth-child(1) {
+					grid-column: span 4;
+
+					@include styles-for(tablet) {
+						grid-column: 4 / 13;
+					}
+				}
+
+				&:nth-child(2) {
+					grid-column: span 4;
+
+					@include styles-for(tablet) {
+						grid-column: 1 / 10;
+					}
+				}
+			}
+		}
+	}
+</style>

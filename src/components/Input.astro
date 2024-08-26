@@ -1,0 +1,122 @@
+---
+import { Text } from "@components/index"
+
+interface Props {
+	number?: string
+	id: string
+	name: string
+	label: string
+	placeholder: string
+	class?: string
+}
+
+const { number, id, name, label, placeholder, class: className } = Astro.props
+---
+
+<div class:list={["c-input", className]}>
+	<div class="c-input__number">
+		{number && <Text text={number} />}
+	</div>
+
+	<div class="c-input__main">
+		<label class="typo-body-md" for={id}>{label}</label>
+
+		<div class="c-input__input-field">
+			<input
+				class="typo-h2"
+				id={id}
+				type="text"
+				name={name}
+				placeholder={placeholder}
+			/>
+
+			<div class="c-input__input-field-decoration-left"></div>
+			<div class="c-input__input-field-decoration-right"></div>
+		</div>
+	</div>
+</div>
+
+<style is:global lang="scss">
+	@use "@styles/mixins.scss" as *;
+
+	.c-input {
+		--input-bg: transparent;
+		--input-color: var(--scheme-contrast);
+		--input-border-color: var(--scheme-contrast);
+
+		color: var(--input-color);
+
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+		gap: var(--space-16);
+
+		@include styles-for(tablet) {
+			gap: var(--space-32);
+		}
+
+		@include styles-for(laptop) {
+			gap: var(--space-64);
+		}
+
+		&__number {
+			display: none;
+
+			@include styles-for(tablet) {
+				display: initial;
+			}
+		}
+
+		&__main {
+			width: 100%;
+			position: relative;
+			grid-column: span 12;
+
+			display: flex;
+			flex-direction: column;
+			gap: var(--space-16);
+
+			@include styles-for(tablet) {
+				grid-column: span 11;
+			}
+
+			@include styles-for(desktop) {
+				grid-column: span 10;
+			}
+		}
+
+		&__input-field input {
+			width: 100%;
+			background-color: var(--input-bg);
+			outline: none;
+			border: none;
+			color: var(--input-color);
+			border-bottom: 1px solid var(--input-border-color);
+			padding-inline: var(--space-8);
+
+			@include styles-for(mobileL) {
+				padding-inline: var(--space-12);
+			}
+
+			@include styles-for(tablet) {
+				padding-inline: var(--space-20);
+			}
+		}
+
+		&__input-field-decoration-left,
+		&__input-field-decoration-right {
+			position: absolute;
+			bottom: 0;
+			width: 1px;
+			height: 16px;
+			background-color: var(--input-border-color);
+		}
+
+		&__input-field-decoration-right {
+			right: 0;
+		}
+
+		&__input-field-decoration-left {
+			left: 0;
+		}
+	}
+</style>

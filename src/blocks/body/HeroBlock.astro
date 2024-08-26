@@ -1,0 +1,190 @@
+---
+import { Title, Button, Image, Icon, SocialLinks } from "@components/index"
+
+interface Props {
+	image?: ImageMetadata
+	class?: string
+}
+
+const { image, class: className } = Astro.props
+---
+
+<div class:list={["hero", className]}>
+	<div class="hero__image">
+		<Image
+			src={image}
+			class="c-picture--cover"
+			alt="hero image"
+			sizes="50vw"
+		/>
+
+		<SocialLinks />
+	</div>
+
+	<div class="hero__main">
+		<div class="hero__title">
+			<Title text="Creative" Tag="h1" />
+			<Title text="Fullstack" Tag="h1" />
+			<Title text="Developer &" Tag="h1" />
+			<Title text="UI/UX Designer" Tag="h1" />
+		</div>
+
+		<Image
+			src={image}
+			class="c-picture--cover"
+			alt="hero image"
+			sizes="100vw"
+		/>
+
+		<SocialLinks class="c-social-links--mirrored" />
+
+		<div class="hero__cta">
+			<Button>
+				<span>Download resume</span>
+				<Icon name="download" size={20} />
+			</Button>
+
+			<Button>
+				<span>Contact me</span>
+				<Icon name="text-bubble" size={20} />
+			</Button>
+		</div>
+	</div>
+</div>
+
+<style is:global lang="scss">
+	@use "@styles/mixins.scss" as *;
+
+	.hero {
+		padding-bottom: var(--space-16);
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: var(--space-48);
+
+		@include styles-for(mobileL) {
+			padding-bottom: var(--space-32);
+		}
+
+		@include styles-for(tablet) {
+			padding-bottom: var(--space-64);
+			grid-template-columns: repeat(8, 1fr);
+		}
+
+		@include styles-for(laptop) {
+			grid-template-columns: repeat(12, 1fr);
+		}
+
+		@include styles-for(desktop) {
+			gap: var(--space-64);
+		}
+
+		&__image {
+			display: none;
+			position: relative;
+
+			@include styles-for(tablet) {
+				grid-column: 1 / 4;
+				display: initial;
+			}
+
+			@include styles-for(laptop) {
+				display: initial;
+				grid-column: 1 / 6;
+			}
+
+			& .c-social-links {
+				position: absolute;
+				bottom: var(--space-16);
+				left: var(--space-24);
+
+				@include styles-for(desktop) {
+					bottom: var(--space-24);
+					left: var(--space-32);
+				}
+			}
+
+			& .c-picture__image {
+				aspect-ratio: 4 / 5;
+			}
+		}
+
+		&__main {
+			height: 100%;
+			gap: var(--space-24) var(--space-48);
+			grid-column: span 4;
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+
+			@include styles-for(tablet) {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				grid-column: 4 / 9;
+			}
+
+			@include styles-for(laptop) {
+				gap: var(--space-96);
+				grid-column: 6 / 13;
+			}
+
+			& > .hero__title {
+				grid-column: span 4;
+			}
+
+			& > .c-picture {
+				grid-row: 2 / 3;
+				grid-column: span 3;
+
+				@include styles-for(mobileL) {
+					grid-column: span 3;
+				}
+
+				@include styles-for(tablet) {
+					display: none;
+				}
+			}
+
+			& > .c-social-links {
+				grid-column: span 4;
+				grid-row: 3 / 4;
+				justify-self: flex-end;
+
+				@include styles-for(tablet) {
+					display: none;
+				}
+			}
+
+			& > .hero__cta {
+				grid-column: span 4;
+				grid-row: 4 / 5;
+			}
+		}
+
+		&__cta {
+			display: flex;
+			gap: var(--space-16);
+			flex-direction: column;
+
+			@include styles-for(tablet) {
+				flex-direction: row;
+				justify-content: flex-end;
+			}
+		}
+
+		&__title {
+			display: grid;
+
+			& > .c-title:nth-child(even) {
+				justify-self: flex-end;
+			}
+
+			& > .c-title:nth-child(odd) {
+				justify-self: flex-start;
+			}
+
+			@include styles-for(laptop) {
+				margin-top: var(--space-64);
+			}
+		}
+	}
+</style>

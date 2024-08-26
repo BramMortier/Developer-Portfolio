@@ -1,0 +1,68 @@
+---
+import "../styles/index.scss"
+
+import { DefaultLayout } from "@layouts/index"
+import { content } from "@config/pages/homepage"
+
+import {
+	HeroBlock,
+	ProjectsBlock,
+	ServicesBlock,
+	ExperienceBlock,
+	ContactBlock,
+	TestimonialsBlock
+} from "@blocks/body/index"
+
+import { Container } from "@components/index"
+---
+
+<DefaultLayout title="Homepage" description="This is a page">
+	<Container class="scheme-dark">
+		<HeroBlock image={content.hero.image} />
+	</Container>
+
+	<Container class="scheme-light">
+		<ProjectsBlock
+			title={content.projects.title}
+			projects={content.projects.list}
+		/>
+	</Container>
+
+	<Container class="scheme-dark">
+		<ServicesBlock
+			title={content.services.title}
+			text={content.services.text}
+			toolset={content.services.toolset}
+		/>
+	</Container>
+
+	<Container class="scheme-light">
+		<ExperienceBlock
+			title={content.experience.title}
+			cards={content.experience.cards}
+		/>
+	</Container>
+
+	<Container class="scheme-dark">
+		<ContactBlock
+			title={content.contact.title}
+			contactInfo={content.contact.contactInfo}
+			location={content.contact.location}
+		/>
+	</Container>
+
+	<Container class="scheme-light">
+		<TestimonialsBlock
+			title={content.testimonials.title}
+			cards={content.testimonials.cards}
+		/>
+	</Container>
+</DefaultLayout>
+
+<style scoped lang="scss">
+	div {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-16);
+	}
+</style>

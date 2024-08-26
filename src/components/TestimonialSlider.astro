@@ -1,0 +1,69 @@
+---
+import { TestimonialCard, Button, Icon } from "@components/index"
+
+interface Props {
+	cards?: any
+	class?: string
+}
+
+const { cards, class: className } = Astro.props
+---
+
+<js-testimonial-slider class:list={["c-testimonial-slider ", className]}>
+	<div class="swiper">
+		<div class="swiper-wrapper">
+			{
+				cards.map((card) => (
+					<TestimonialCard
+						class="swiper-slide"
+						title={card.title}
+						text={card.text}
+						author={card.author}
+						authorRole={card.authorRole}
+					/>
+				))
+			}
+		</div>
+
+		<div class="c-testimonial-slider__navigation">
+			<Button class="c-testimonial-slider__prev c-button--secondary">
+				<Icon name="arrow" rotation={180} size={16} />
+				<span>Previous</span>
+			</Button>
+			<Button class="c-testimonial-slider__next c-button--secondary">
+				<span>Next</span>
+				<Icon name="arrow" size={16} />
+			</Button>
+		</div>
+	</div>
+</js-testimonial-slider>
+
+<style is:global lang="scss">
+	@use "@styles/mixins.scss" as *;
+
+	.c-testimonial-slider {
+		& > div {
+			display: flex;
+			flex-direction: column;
+			gap: var(--space-32);
+			align-items: flex-end;
+
+			@include styles-for(laptop) {
+				gap: var(--space-64);
+			}
+		}
+
+		&__navigation {
+			display: flex;
+			gap: var(--space-32);
+
+			@include styles-for(laptop) {
+				gap: var(--space-48);
+			}
+		}
+	}
+
+	.swiper {
+		overflow: visible !important;
+	}
+</style>

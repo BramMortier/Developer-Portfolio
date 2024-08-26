@@ -1,0 +1,122 @@
+---
+import {
+	Title,
+	Link,
+	ProjectCase1,
+	ProjectCase2,
+	ProjectCase3,
+	ProjectCase4
+} from "@components/index"
+
+interface Props {
+	title?: string
+	projects?: any
+	class?: string
+}
+
+const { class: className, projects, title } = Astro.props
+---
+
+<div class:list={["projects", className]} id="projects">
+	{title && <Title text={title} Tag="h1" arrow={true} />}
+
+	<ul class="projects__list">
+		<Link href={projects[0].href} class="c-link--plain">
+			<li>
+				<ProjectCase1
+					name={projects[0].name}
+					index={`0${0 + 1}`}
+					text={projects[0].text}
+					technologies={projects[0].technologies}
+					accentColor={projects[0].accentColor}
+					images={projects[0].images}
+				/>
+			</li>
+		</Link>
+
+		<Link href={projects[1].href} class="c-link--plain">
+			<li>
+				<ProjectCase2
+					name={projects[1].name}
+					index={`0${1 + 1}`}
+					text={projects[1].text}
+					technologies={projects[1].technologies}
+					accentColor={projects[1].accentColor}
+					images={projects[1].images}
+				/>
+			</li>
+		</Link>
+
+		<Link href={projects[2].href} class="c-link--plain">
+			<li>
+				<ProjectCase3
+					name={projects[2].name}
+					index={`0${2 + 1}`}
+					text={projects[2].text}
+					technologies={projects[2].technologies}
+					accentColor={projects[2].accentColor}
+					images={projects[2].images}
+				/>
+			</li>
+		</Link>
+
+		<Link href={projects[3].href} class="c-link--plain">
+			<li>
+				<ProjectCase4
+					name={projects[3].name}
+					index={`0${3 + 1}`}
+					text={projects[3].text}
+					technologies={projects[3].technologies}
+					accentColor={projects[3].accentColor}
+					images={projects[3].images}
+				/>
+			</li>
+		</Link>
+	</ul>
+</div>
+
+<style is:global lang="scss">
+	@use "@styles/mixins.scss" as *;
+
+	.projects {
+		padding-block: var(--space-64);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-48);
+
+		@include styles-for(tablet) {
+			gap: var(--space-96);
+		}
+
+		@include styles-for(laptop) {
+			padding-block: var(--space-160);
+		}
+
+		& > .c-title {
+			max-width: 100%;
+			margin-bottom: 0;
+
+			@include styles-for(laptop) {
+				max-width: 70%;
+			}
+
+			@include styles-for(desktop) {
+				margin-bottom: var(--space-96);
+			}
+		}
+
+		&__list {
+			display: flex;
+			flex-direction: column;
+			gap: var(--space-96);
+
+			@include styles-for(tablet) {
+				gap: var(--space-256);
+			}
+
+			@include styles-for(laptop) {
+				gap: var(--space-400);
+			}
+		}
+	}
+</style>

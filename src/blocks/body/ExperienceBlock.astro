@@ -1,0 +1,65 @@
+---
+import { Title, ExperienceCard } from "@components/index"
+
+interface Props {
+	title?: string
+	cards: any
+	class?: string
+}
+
+const { class: className, title, cards } = Astro.props
+---
+
+<div class:list={["experience", className]} id="experience">
+	{title && <Title text={title} Tag="h1" arrow={true} />}
+
+	<ul class="experience__list">
+		{
+			cards.map((experience) => (
+				<ExperienceCard
+					image={experience.image}
+					jobTitle={experience.jobTitle}
+					responsibilities={experience.responsibilities}
+					location={experience.location}
+					locationIcon={experience.locationIcon}
+					companyName={experience.companyName}
+					employmentPeriod={experience.employmentPeriod}
+				/>
+			))
+		}
+	</ul>
+</div>
+
+<style is:global lang="scss">
+	@use "@styles/mixins.scss" as *;
+
+	.experience {
+		padding-block: var(--space-64);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-32);
+
+		@include styles-for(laptop) {
+			padding-block: var(--space-160);
+			gap: var(--space-64);
+		}
+
+		&__list {
+			display: flex;
+			flex-direction: column;
+			gap: var(--space-32);
+
+			@include styles-for(tablet) {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: var(--space-32);
+			}
+
+			@include styles-for(laptop) {
+				display: flex;
+				flex-direction: column;
+				gap: var(--space-64);
+			}
+		}
+	}
+</style>
